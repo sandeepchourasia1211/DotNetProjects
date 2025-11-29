@@ -10,7 +10,7 @@ using var db = new OrganizationDb();
 // Ensures DB + Tables are created
 db.Database.EnsureCreated();
 
-Console.WriteLine("✔ Database & Tables Created Successfully!");
+Console.WriteLine(" Database & Tables Created Successfully!");
 
 OrganizationDb organizationDb=new OrganizationDb();
 List<Department> dept = organizationDb.Departments.ToList();
