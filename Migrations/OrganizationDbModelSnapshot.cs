@@ -48,9 +48,6 @@ namespace EFFirstApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Eid"));
 
-                    b.Property<DateTime>("DOB")
-                        .HasColumnType("datetime2");
-
                     b.Property<int?>("Did")
                         .HasColumnType("int");
 
@@ -68,7 +65,39 @@ namespace EFFirstApp.Migrations
 
                     b.HasKey("Eid");
 
+                    b.HasIndex("Did");
+
                     b.ToTable("Employee");
+                });
+
+            modelBuilder.Entity("Student", b =>
+                {
+                    b.Property<int>("Sid")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Sid");
+
+                    b.ToTable("Student");
+                });
+
+            modelBuilder.Entity("Employee", b =>
+                {
+                    b.HasOne("Department", "Department")
+                        .WithMany("Employees")
+                        .HasForeignKey("Did");
+
+                    b.Navigation("Department");
+                });
+
+            modelBuilder.Entity("Department", b =>
+                {
+                    b.Navigation("Employees");
                 });
 #pragma warning restore 612, 618
         }
